@@ -14,8 +14,6 @@ import static org.junit.Assert.*;
 public class BurgerTests {
 
     Burger burger;
-    Bun testBun;
-    Ingredient testIngredient;
 
     @Spy
     Database database;
@@ -29,25 +27,21 @@ public class BurgerTests {
     @Test
     public void bunShouldBeSet(){
         List<Bun> buns = database.availableBuns();
-        testBun = buns.get(0);
-        burger.setBuns(testBun);
-        System.out.println(testBun.name);
-        assertThat(burger.bun, is(testBun));
+        burger.setBuns(buns.get(0));
+        assertThat(burger.bun, is(buns.get(0)));
     }
 
     @Test
     public void shouldAddIngredient(){
         List<Ingredient> ingredients = database.availableIngredients();
-        testIngredient = ingredients.get(3);
-        burger.addIngredient(testIngredient);
-        assertTrue(burger.ingredients.contains(testIngredient));
+        burger.addIngredient(ingredients.get(3));
+        assertTrue(burger.ingredients.contains(ingredients.get(3)));
     }
 
     @Test
     public void shouldRemoveIngredient(){
         List<Ingredient> ingredients = database.availableIngredients();
-        testIngredient = ingredients.get(3);
-        burger.addIngredient(testIngredient);
+        burger.addIngredient(ingredients.get(3));
         burger.removeIngredient(0);
         assertTrue(burger.ingredients.isEmpty());
     }
@@ -55,12 +49,10 @@ public class BurgerTests {
     @Test
     public void shouldMoveIngredients(){
         List<Ingredient> ingredients = database.availableIngredients();
-        testIngredient = ingredients.get(3);
-        burger.addIngredient(testIngredient);
-        testIngredient = ingredients.get(0);
-        burger.addIngredient(testIngredient);
+        burger.addIngredient(ingredients.get(3));
+        burger.addIngredient(ingredients.get(0));
         burger.moveIngredient(0,1);
-        assertThat(burger.ingredients.get(0), is(testIngredient));
+        assertThat(burger.ingredients.get(0), is(ingredients.get(0)));
     }
 
 
