@@ -1,7 +1,7 @@
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Spy;
+import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 import praktikum.*;
 
@@ -15,7 +15,7 @@ public class BurgerTests {
 
     Burger burger;
 
-    @Spy
+    @Mock
     Database database;
     List<Bun> buns;
     List<Ingredient> ingredients;
