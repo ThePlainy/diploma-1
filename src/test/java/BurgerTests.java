@@ -17,6 +17,8 @@ public class BurgerTests {
 
     @Spy
     Database database;
+    List<Bun> buns;
+    List<Ingredient> ingredients;
 
     @Before
     public void startup(){
@@ -26,21 +28,21 @@ public class BurgerTests {
 
     @Test
     public void bunShouldBeSet(){
-        List<Bun> buns = database.availableBuns();
+        buns = database.availableBuns();
         burger.setBuns(buns.get(0));
         assertThat(burger.bun, is(buns.get(0)));
     }
 
     @Test
     public void shouldAddIngredient(){
-        List<Ingredient> ingredients = database.availableIngredients();
+        ingredients = database.availableIngredients();
         burger.addIngredient(ingredients.get(3));
         assertTrue(burger.ingredients.contains(ingredients.get(3)));
     }
 
     @Test
     public void shouldRemoveIngredient(){
-        List<Ingredient> ingredients = database.availableIngredients();
+        ingredients = database.availableIngredients();
         burger.addIngredient(ingredients.get(3));
         burger.removeIngredient(0);
         assertTrue(burger.ingredients.isEmpty());
@@ -48,7 +50,7 @@ public class BurgerTests {
 
     @Test
     public void shouldMoveIngredients(){
-        List<Ingredient> ingredients = database.availableIngredients();
+        ingredients = database.availableIngredients();
         burger.addIngredient(ingredients.get(3));
         burger.addIngredient(ingredients.get(0));
         burger.moveIngredient(0,1);
