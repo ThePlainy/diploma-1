@@ -5,7 +5,6 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 import praktikum.*;
 
-import java.util.List;
 
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
@@ -16,45 +15,41 @@ public class BurgerTests {
     Burger burger;
 
     @Mock
-    Database database;
-    List<Bun> buns;
-    List<Ingredient> ingredients;
+    Bun bun1;
+    Ingredient ingredient1;
+    Ingredient ingredient2;
+
 
     @Before
     public void startup(){
         burger = new Burger();
-        database = new Database();
     }
 
     @Test
     public void bunShouldBeSet(){
-        buns = database.availableBuns();
-        burger.setBuns(buns.get(0));
-        assertThat(burger.bun, is(buns.get(0)));
+        burger.setBuns(bun1);
+        assertThat(burger.bun, is(bun1));
     }
 
     @Test
     public void shouldAddIngredient(){
-        ingredients = database.availableIngredients();
-        burger.addIngredient(ingredients.get(3));
-        assertTrue(burger.ingredients.contains(ingredients.get(3)));
+        burger.addIngredient(ingredient1);
+        assertTrue(burger.ingredients.contains(ingredient1));
     }
 
     @Test
     public void shouldRemoveIngredient(){
-        ingredients = database.availableIngredients();
-        burger.addIngredient(ingredients.get(3));
+        burger.addIngredient(ingredient1);
         burger.removeIngredient(0);
         assertTrue(burger.ingredients.isEmpty());
     }
 
     @Test
     public void shouldMoveIngredients(){
-        ingredients = database.availableIngredients();
-        burger.addIngredient(ingredients.get(3));
-        burger.addIngredient(ingredients.get(0));
+        burger.addIngredient(ingredient1);
+        burger.addIngredient(ingredient2);
         burger.moveIngredient(0,1);
-        assertThat(burger.ingredients.get(0), is(ingredients.get(0)));
+        assertThat(burger.ingredients.get(0), is(ingredient1));
     }
 
 
